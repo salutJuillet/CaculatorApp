@@ -31,16 +31,18 @@ const Caculator = () => {
             <TextInput style={st.result} />
         </View>
 
+        <View style={st.seperator}></View>
+
         <View style={st.buttonContainer}>
             <View style={st.column}>
                 <TouchableOpacity style={[st.button, st.flex1]}>
                     <View>
-                        <Text>C</Text>
+                        <Text style={st.operatorClear}>C</Text>
                     </View>
                 </TouchableOpacity>
             <TouchableOpacity style={[st.button, st.flex1]}>
                 <View>
-                    <Text>지우기</Text>
+                    <Text style={st.operator}>지우기</Text>
                 </View>
             </TouchableOpacity>
             </View>
@@ -48,22 +50,22 @@ const Caculator = () => {
             <View style={st.column}>
                 <TouchableOpacity style={[st.button, st.flex1]}>
                     <View>
-                        <Text>7</Text>
+                        <Text style={st.number}>7</Text>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity style={[st.button, st.flex1]}>
                     <View>
-                        <Text>8</Text>
+                        <Text style={st.number}>8</Text>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity style={[st.button, st.flex1]}>
                     <View>
-                        <Text>9</Text>
+                        <Text style={st.number}>9</Text>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity style={[st.button, st.flex1]}>
                     <View>
-                        <Text>÷</Text>
+                        <Text style={st.operator}>÷</Text>
                     </View>
                 </TouchableOpacity>
             </View>
@@ -72,22 +74,22 @@ const Caculator = () => {
             <View style={st.column}>
                 <TouchableOpacity style={[st.button, st.flex1]}>
                     <View>
-                        <Text>4</Text>
+                        <Text style={st.number}>4</Text>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity style={[st.button, st.flex1]}>
                     <View>
-                        <Text>5</Text>
+                        <Text style={st.number}>5</Text>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity style={[st.button, st.flex1]}>
                     <View>
-                        <Text>6</Text>
+                        <Text style={st.number}>6</Text>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity style={[st.button, st.flex1]}>
                     <View>
-                        <Text>×</Text>
+                        <Text style={st.operator}>×</Text>
                     </View>
                 </TouchableOpacity>
             </View>
@@ -95,45 +97,45 @@ const Caculator = () => {
             <View style={st.column}>
                 <TouchableOpacity style={[st.button, st.flex1]}>
                     <View>
-                        <Text>1</Text>
+                        <Text style={st.number}>1</Text>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity style={[st.button, st.flex1]}>
                     <View>
-                        <Text>2</Text>
+                        <Text style={st.number}>2</Text>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity style={[st.button, st.flex1]}>
                     <View>
-                        <Text>3</Text>
+                        <Text style={st.number}>3</Text>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity style={[st.button, st.flex1]}>
                     <View>
-                        <Text>－</Text>
+                        <Text style={st.operator}>－</Text>
                     </View>
                 </TouchableOpacity>
             </View>
 
             <View style={st.column}>
-                <TouchableOpacity style={[st.button, st.flex1]} disabled>
+                <TouchableOpacity style={[st.button, st.flex1]}>
                     <View>
-                        <Text></Text>
+                        <Text style={st.operator}>.</Text>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity style={[st.button, st.flex1]}>
                     <View>
-                        <Text>0</Text>
+                        <Text style={st.number}>0</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity style={[st.buttonEqual, st.flex1]}>
+                    <View>
+                        <Text style={st.operator}>＝</Text>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity style={[st.button, st.flex1]}>
                     <View>
-                        <Text>＝</Text>
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity style={[st.button, st.flex1]}>
-                    <View>
-                        <Text>＋</Text>
+                        <Text style={st.operator}>＋</Text>
                     </View>
                 </TouchableOpacity>
             </View>
@@ -144,10 +146,10 @@ const Caculator = () => {
 
 const st = StyleSheet.create({
     container:{
+        
     },
     displayContainer:{
-        borderWidth:1,
-        height:200,
+        height:160,
         alignItems:'flex-end'
     },
     formula:{
@@ -156,20 +158,55 @@ const st = StyleSheet.create({
     result:{
         fontSize:80
     },
+    seperator:{
+        width:'90%',
+        borderWidth:0.5,
+        alignSelf:'center',
+        marginTop:20,
+        marginBottom:20
+    },
     buttonContainer:{
-        borderWidth:1
+        padding:2
     },
     column:{
-        borderWidth:1,
         flexDirection:'row',
         height:90,
-        
+        alignItems:'center'
     },
     button:{
-        borderWidth:1,
         height:'100%',
         alignItems:'center',
-        justifyContent:'center'
+        justifyContent:'center',
+        height:80,
+        borderRadius:42,
+        backgroundColor:'#C7DFF7',
+        margin:8,
+        elevation:3
+    },
+    buttonEqual:{
+        height:'100%',
+        alignItems:'center',
+        justifyContent:'center',
+        height:80,
+        borderRadius:42,
+        backgroundColor:'hotpink',
+        margin:8,
+        elevation:3
+    },
+    number:{
+        color:'blue',
+        fontSize:30,
+        fontWeight:'500'
+    },
+    operator:{
+        color:'#ffffff',
+        fontSize:30,
+        fontWeight:'700'
+    },
+    operatorClear:{
+        color:'green',
+        fontSize:30,
+        fontWeight:'700'
     },
 
 
