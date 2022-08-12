@@ -22,10 +22,17 @@ const Caculator = () => {
     /**** 숫자를 탭했을 때 ****/
     const handleNumber = (value) => {
         if(base.currentValue === '0' || base.currentValue === ''){ 
+            if(value === '.'){
+                return setBase(() => {
+                    let newBase = {...base};
+                    newBase.currentValue = `0${value}`;
+                    return newBase;
+                })
+            }
             return setBase(() => {
                 let newBase = {...base};
                 newBase.currentValue = `${value}`;
-                console.log(newBase);
+                // console.log(newBase);
                 return newBase;
             })
             //초기상태에서 숫자를 눌렀을 때, 누른 숫자값을 반환
@@ -39,7 +46,7 @@ const Caculator = () => {
     }
 
     /**** 연산자를 탭했을 때 ****/
-    const handleOperator = (base) => {
+    const handleOperator = (value, base) => {
         return setBase((base) => {
             let newBase = {...base};
             newBase.operator = value;
@@ -72,7 +79,6 @@ const Caculator = () => {
         // const {currentValue, previousValue, operator} = base;
         const current = parseFloat(base.currentValue); //문자열을 숫자로 변환
         const previous = parseFloat(base.previousValue);
-        console.log(current, previous);
         
         switch(base.operator){
             case '/' :
@@ -129,7 +135,7 @@ const Caculator = () => {
             case "number":
                 return handleNumber(value, base);
             case "operator":
-                return handleOperator(base);
+                return handleOperator(value, base);
             case "posneg":
                 return handlePosneg(base);
             case "percentage":

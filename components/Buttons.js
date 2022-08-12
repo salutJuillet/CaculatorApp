@@ -16,7 +16,7 @@ const Buttons = ({title, type, onPress}) => {
   if(type === "number"){
     textStyles.length = 0;
     textStyles.push(st.number);
-  } else if(type === "operator" || type === "equal"){
+  } else if(type === "operator" || type === "equal" || type === "posneg" || type === "percentage"){
     textStyles.length = 0;
     textStyles.push(st.operator);
   } else if(type === "clear"){
@@ -47,7 +47,7 @@ const st = StyleSheet.create({
         borderRadius:42,
         backgroundColor:'#c7dff7',
         margin:8,
-        elevation:3
+        elevation:4
     },
     buttonEqual:{
         height:'100%',
