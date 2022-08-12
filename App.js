@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, SafeAreaView } from 'react-native';
 import Caculator from './components/CaculatorApp';
 
 
@@ -10,15 +10,14 @@ import Caculator from './components/CaculatorApp';
 export default function App() {
 
   return (
-    <View style={st.container}>
+    <SafeAreaView style={st.container}>
       <Caculator />
-    </View>
+    </SafeAreaView>
   );
 }
 
 const st = StyleSheet.create({
   container: {
-    marginTop:25,
     flex: 1,
     backgroundColor: '#eff3f4'
   },

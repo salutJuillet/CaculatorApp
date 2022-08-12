@@ -1,5 +1,5 @@
 import React, {useState, useTransition} from 'react'
-import { SafeAreaView, View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 // import calculator from '../util/caculotor';
 import Button from './Buttons';
 
@@ -19,7 +19,7 @@ const Caculator = () => {
         calculator(type, value, base); //함수에 base를 매개변수로 보낸다.
     }
 
-    /** ../util/calculator.js */
+    /**** 숫자를 탭했을 때 ****/
     const handleNumber = (value) => {
         if(base.currentValue === '0' || base.currentValue === ''){ 
             return setBase(() => {
@@ -37,9 +37,37 @@ const Caculator = () => {
         })
         //값을 탭할 때, 숫자 또는 연산자가 연속으로 입력되도록
     }
-    
 
-    /**** equal을 눌렀을 때 *****/
+    /**** 연산자를 탭했을 때 ****/
+    const handleOperator = (base) => {
+        return setBase((base) => {
+            let newBase = {...base};
+            newBase.operator = value;
+            newBase.previousValue = base.currentValue;
+            newBase.currentValue = '';
+            return newBase;
+        })
+    }
+
+    /**** +/-를 탭했을 때 ****/
+    const handlePosneg = (base) => {
+        return setBase((base) => {
+            let newBase = {...base};
+            newBase.currentValue = `${parseFloat(base.currentValue) * -1}`;
+            return newBase;
+        })
+    }
+
+    /**** %를 탭했을 때 ****/
+    const handlePercentage = (base) => {
+        return setBase((base) => {
+            let newBase = {...base};
+            newBase.currentValue = `${parseFloat(base.currentValue) * 0.01}`;
+            return newBase;
+        })
+    }    
+
+    /**** equal을 탭했을 때 *****/
     const handleEqual = (base) => {
         // const {currentValue, previousValue, operator} = base;
         const current = parseFloat(base.currentValue); //문자열을 숫자로 변환
@@ -83,38 +111,43 @@ const Caculator = () => {
         }
     }
 
+    /**** delete를 탭했을 때 ****/
+    const handleDelete = (base) => {
+        return setBase((base) => {
+            let newBase = {...base};
+            newBase.currentValue = base.currentValue.slice(0,-1);
+            return newBase;
+        })
+    }
+
+    
+
 
     /**** calculotor *****/
     const calculator = (type, value, base) => {
         switch (type) {
-          case "number":
-            return handleNumber(value, base);
-          case "operator":
-            return setBase((base) => {
-                let newBase = {...base};
-                newBase.operator = value;
-                newBase.previousValue = base.currentValue;
-                newBase.currentValue = '';
-                return newBase;
-            })
-          case "equal":
-            return handleEqual(base);
-          case "clear":
-            return setBase({...initialState});
-          case "delete":
-            return setBase((base) => {
-                let newBase = {...base};
-                newBase.currentValue = base.currentValue.slice(0,-1);
-                return newBase;
-            })
-          default:
-            return base;
+            case "number":
+                return handleNumber(value, base);
+            case "operator":
+                return handleOperator(base);
+            case "posneg":
+                return handlePosneg(base);
+            case "percentage":
+                return handlePercentage(base);
+            case "equal":
+                return handleEqual(base);
+            case "clear":
+                return setBase({...initialState});
+            case "delete":
+                return handleDelete(base);
+            default:
+                return base;
         }
     };
 
 
   return (
-    <SafeAreaView style={st.container}>
+    <View style={st.container}>
         <View style={st.displayContainer}>
             {/* <Text style={st.formula}>
                 {base.previousValue}{base.operator}{base.currentValue}
@@ -132,6 +165,16 @@ const Caculator = () => {
                 <Button title="C"
                         type="clear"
                         onPress={()=> handleTap('clear')} />
+                <Button
+                    title="+/-"
+                    type="posneg"
+                    onPress={() => handleTap("posneg", "+/-")}
+                />
+                <Button
+                    title="%"
+                    type="percentage"
+                    onPress={() => handleTap("percentage", "%")}
+                />
                 <Button title="del"
                         type="delete"
                         onPress={()=> handleTap('delete')} />
@@ -210,7 +253,7 @@ const Caculator = () => {
                 />
             </View>
         </View>
-    </SafeAreaView>
+    </View>
   )
 }
 
@@ -219,7 +262,7 @@ const st = StyleSheet.create({
         
     },
     displayContainer:{
-        height:160,
+        height:200,
         alignItems:'flex-end',
         justifyContent:'flex-end'
     },
