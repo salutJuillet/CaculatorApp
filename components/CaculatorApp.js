@@ -1,4 +1,4 @@
-import React, {useState, useTransition} from 'react'
+import React, {useState} from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 // import calculator from '../util/caculotor';
 import Button from './Buttons';
@@ -6,6 +6,8 @@ import Button from './Buttons';
 
 
 const Caculator = () => {
+    
+    const [darkmode, setDarkmode] = useState(false);
 
     const initialState = {
         currentValue: "0",
@@ -153,7 +155,7 @@ const Caculator = () => {
 
 
   return (
-    <View style={st.container}>
+    <View style={darkmode ? st.containerDark : st.container}>
         <View style={st.displayContainer}>
             {/* <Text style={st.formula}>
                 {base.previousValue}{base.operator}{base.currentValue}
@@ -164,26 +166,30 @@ const Caculator = () => {
             </Text>
         </View>
 
-        <View style={st.seperator}></View>
+        <View style={darkmode ? st.seperatorDark : st.seperator} />
 
         <View style={st.buttonContainer}>
             <View style={st.column}>
                 <Button title="C"
                         type="clear"
-                        onPress={()=> handleTap('clear')} />
+                        onPress={()=> handleTap('clear')}
+                        darkmode={darkmode} />
                 <Button
                     title="+/-"
                     type="posneg"
                     onPress={() => handleTap("posneg", "+/-")}
+                    darkmode={darkmode}
                 />
                 <Button
                     title="%"
                     type="percentage"
                     onPress={() => handleTap("percentage", "%")}
+                    darkmode={darkmode}
                 />
                 <Button title="del"
                         type="delete"
-                        onPress={()=> handleTap('delete')} />
+                        onPress={()=> handleTap('delete')}
+                        darkmode={darkmode} />
                 
             </View>
 
@@ -191,17 +197,21 @@ const Caculator = () => {
             <View style={st.column}>
                 <Button title="7" 
                         type="number"
-                        onPress={() => handleTap("number", 7)} />
+                        onPress={() => handleTap("number", 7)}
+                        darkmode={darkmode} />
                 <Button title="8"
                         type="number"
-                        onPress={() => handleTap("number", 8)} />
+                        onPress={() => handleTap("number", 8)}
+                        darkmode={darkmode} />
                 <Button title="9"
                         type="number" 
-                        onPress={() => handleTap("number", 9)} />
+                        onPress={() => handleTap("number", 9)}
+                        darkmode={darkmode} />
                 <Button
                     title="&#247;"
                     type="operator"
                     onPress={() => handleTap("operator", "/")}
+                    darkmode={darkmode}
                 />
             </View>
             
@@ -209,53 +219,65 @@ const Caculator = () => {
             <View style={st.column}>
                 <Button title="4" 
                         type="number"
-                        onPress={() => handleTap("number", 4)} />
+                        onPress={() => handleTap("number", 4)}
+                        darkmode={darkmode} />
                 <Button title="5"
                         type="number"
-                        onPress={() => handleTap("number", 5)} />
+                        onPress={() => handleTap("number", 5)}
+                        darkmode={darkmode} />
                 <Button title="6" 
                         type="number"
-                        onPress={() => handleTap("number", 6)} />
+                        onPress={() => handleTap("number", 6)}
+                        darkmode={darkmode} />
                 <Button
                     title="&#215;"
                     type="operator"
                     onPress={() => handleTap("operator", "*")}
+                    darkmode={darkmode}
                 />
             </View>
 
             <View style={st.column}>
                 <Button title="1" 
                         type="number"
-                        onPress={() => handleTap("number", 1)} />
+                        onPress={() => handleTap("number", 1)}
+                        darkmode={darkmode} />
                 <Button title="2" 
                         type="number"
-                        onPress={() => handleTap("number", 2)} />
+                        onPress={() => handleTap("number", 2)}
+                        darkmode={darkmode} />
                 <Button title="3" 
                         type="number"
-                        onPress={() => handleTap("number", 3)} />
+                        onPress={() => handleTap("number", 3)}
+                        darkmode={darkmode} />
                 <Button
                     title="&#45;"
                     type="operator"
                     onPress={() => handleTap("operator", "-")}
+                    darkmode={darkmode}
                 />
             </View>
 
             <View style={st.column}>
                 <Button title="."
                         type="number"
-                        onPress={() => handleTap("number", '.')} />
+                        onPress={() => handleTap("number", '.')}
+                        darkmode={darkmode} />
                 <Button title="0" 
                         type="number"
-                        onPress={() => handleTap("number", 0)} />
+                        onPress={() => handleTap("number", 0)}
+                        darkmode={darkmode} />
                 <Button
                     title="&#61;"
                     type="equal"
                     onPress={() => handleTap("equal", "=")}
+                    darkmode={darkmode}
                 />
                 <Button
                     title="&#43;"
                     type="operator"
                     onPress={() => handleTap("operator", "+")}
+                    darkmode={darkmode}
                 />
             </View>
         </View>
@@ -265,7 +287,11 @@ const Caculator = () => {
 
 const st = StyleSheet.create({
     container:{
-        
+        flex:1
+    },
+    containerDark:{
+        flex:1,
+        backgroundColor:'#333333'
     },
     displayContainer:{
         height:200,
@@ -284,6 +310,14 @@ const st = StyleSheet.create({
     seperator:{
         width:'93%',
         borderWidth:0.5,
+        alignSelf:'center',
+        marginTop:20,
+        marginBottom:20
+    },
+    seperatorDark:{
+        width:'93%',
+        borderWidth:0.5,
+        borderColor:'#666666',
         alignSelf:'center',
         marginTop:20,
         marginBottom:20

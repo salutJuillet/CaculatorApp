@@ -2,10 +2,10 @@ import React from 'react'
 import { TouchableOpacity, View, Text, StyleSheet } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 
-const Buttons = ({title, type, onPress}) => {
+const Buttons = ({title, type, onPress, darkmode}) => {
 
-  const buttonStyles = [st.button, st.flex1];
-  const textStyles = [st.number];
+  const buttonStyles = [darkmode ? st.buttonDark : st.button, st.flex1];
+  const textStyles = [darkmode ? st.numberDark : st.number];
 
   if(title === "="){
     textStyles.length = 0;
@@ -15,7 +15,7 @@ const Buttons = ({title, type, onPress}) => {
 
   if(type === "number"){
     textStyles.length = 0;
-    textStyles.push(st.number);
+    textStyles.push(darkmode ? st.numberDark : st.number);
   } else if(type === "operator" || type === "equal" || type === "posneg" || type === "percentage"){
     textStyles.length = 0;
     textStyles.push(st.operator);
@@ -49,6 +49,16 @@ const st = StyleSheet.create({
         margin:8,
         elevation:4
     },
+    buttonDark:{
+        height:'100%',
+        alignItems:'center',
+        justifyContent:'center',
+        height:80,
+        borderRadius:42,
+        backgroundColor:'#5a8fc1',
+        margin:8,
+        elevation:4
+    },
     buttonEqual:{
         height:'100%',
         alignItems:'center',
@@ -64,6 +74,11 @@ const st = StyleSheet.create({
         fontSize:30,
         fontWeight:'500'
     },
+    numberDark:{
+      color:'#ffffff',
+      fontSize:30,
+      fontWeight:'500'
+  },
     operator:{
         color:'#ffffff',
         fontSize:30,
