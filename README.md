@@ -9,7 +9,7 @@
 # Calculator App
 
 <div align="center">
-  <img src="assets/image/preview01.jpg" width="250px"/>  
+  <img src="assets/preview.jpg" width="250px"/>  
 </div>
 
 <br/>
