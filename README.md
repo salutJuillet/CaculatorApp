@@ -9,7 +9,8 @@
 # Calculator App
 
 <div align="center">
-  <img src="assets/preview.jpg" width="250px"/>  
+  <img src="assets/preview.jpg" width="250px"/> <br/>
+  <a href="https://youtu.be/vZogIpvljbU" target="_blank">https://youtu.be/vZogIpvljbU</a>
 </div>
 
 <br/>
